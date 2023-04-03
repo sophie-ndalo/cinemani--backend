@@ -38,6 +38,12 @@ class MoviesController < ApplicationController
     head :no_content
   end
 
+  def trending_movies
+    movie = Movie.last(3)
+  
+  end
+  
+
   private
   def set_movie
     @movie = Movie.find(params[:id])
@@ -47,3 +53,4 @@ class MoviesController < ApplicationController
     params.permit(:title, :description, :duration, :video_url)
   end
 end
+
