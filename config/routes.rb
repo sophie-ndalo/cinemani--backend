@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: [:create]
-  post '/login', to: 'auth#create'
-  get '/profile', to: 'users#profile'
+ 
+      resources :users, only: [:create]
+      post '/login', to: 'auth#create'
+      get '/profile', to: 'users#profile'
+   
+  post '/user', to: 'users#create'
+
   resources :movies
   resources :directors
   get 'movies/five', to: 'movies#display_five_movies'

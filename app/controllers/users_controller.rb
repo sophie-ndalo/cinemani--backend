@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    byebug
     @user = User.create(user_params)
     if @user.valid?
       render json: { user: UserSerializer.new(@user) }, status: :created
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :bio, :avatar)
+    params.require(:user).permit(:username, :name, :password, :password_confirmation, :email, :avatar)
   end
 end
 
