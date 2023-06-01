@@ -1,17 +1,23 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, except: :create
   def index
     @users = User.all
     render json: @users
   end
 
   def create
-    @user = User.create(user_params)
-    if @user.valid?
-      render json: { user: UserSerializer.new(@user) }, status: :created
-    else
-      render json: { error: 'failed to create user' }, status: :unprocessable_entity
-    end
+    user = User.create!(
+      email: params[:email],
+      name: params[:name],
+      username: params[:username],
+      avatar: params[:avatar],
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
+    render json: user, status: :created
   end
+  
+  
   
   def show
     @user = User.find_by(id: session[:user_id])
